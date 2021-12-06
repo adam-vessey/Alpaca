@@ -60,11 +60,15 @@ public abstract class PropertyConfig {
    *   The number of concurrent consumers. -1 means no setting.
    * @param maxConcurrentConsumers
    *   The max number of concurrent consumers. -1 means no setting.
+   * @param asyncConsumers
+   *   Indicate if the queue should be processed strictly queue-wise (false;
+   *   more for dealing with overhead?); otherwise, allow multiple items to be
+   *   processed at the same time.
    * @return
    *   The modified topic/queue string.
    */
   public static String addJmsOptions(final String queueString, final int concurrentConsumers,
-                              final int maxConcurrentConsumers) {
+                              final int maxConcurrentConsumers, final boolean asyncConsumers) {
     final StringBuilder builder = new StringBuilder();
     if (concurrentConsumers > 0) {
       builder.append("concurrentConsumers=");
@@ -76,6 +80,10 @@ public abstract class PropertyConfig {
       }
       builder.append("maxConcurrentConsumers=");
       builder.append(maxConcurrentConsumers);
+    }
+    if (asyncConsumers) {
+        builder.append("asyncConsumer=")
+            .append(asyncConsumers);
     }
     if (builder.length() > 0) {
       return queueString + (queueString.contains("?") ? '&' : '?') + builder;
