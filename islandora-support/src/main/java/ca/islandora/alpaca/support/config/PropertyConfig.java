@@ -82,8 +82,11 @@ public abstract class PropertyConfig {
       builder.append(maxConcurrentConsumers);
     }
     if (asyncConsumers) {
-        builder.append("asyncConsumer=")
-            .append(asyncConsumers);
+      if (builder.length() > 0) {
+        builder.append('&');
+      }
+      builder.append("asyncConsumer=")
+        .append(asyncConsumers);
     }
     if (builder.length() > 0) {
       return queueString + (queueString.contains("?") ? '&' : '?') + builder;
