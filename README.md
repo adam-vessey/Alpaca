@@ -199,12 +199,14 @@ derivative.houdini.in.stream=queue:islandora-connector-houdini
 derivative.houdini.service.url=http://127.0.0.1:8000/houdini/convert
 derivative.houdini.concurrent-consumers=1
 derivative.houdini.max-concurrent-consumers=4
+derivative.houdini.async-consumer=true
 
 derivative.fits.enabled=true
 derivative.fits.in.stream=queue:islandora-connector-fits
 derivative.fits.service.url=http://127.0.0.1:8000/crayfits
 derivative.fits.concurrent-consumers=2
 derivative.fits.max-concurrent-consumers=2
+derivative.fits.async-consumer=false
 ```
 
 ### Customizing HTTP client timeouts
